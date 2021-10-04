@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Основы Vue</title>
+    <link rel="stylesheet" href="theme.css"/>
+</head>
+<body>
+
+<div v-cloak class="container" id="app">
+    <div class="card">
+        <div class="content__container" v-for="(step, idx) in steps">
+            <h1 v-if="activeIndex == idx">{{steps[idx].title}}</h1>
+
+            <div v-if="activeIndex == idx" class="steps">
+                <div class="steps-content">
+                    {{steps[idx].text}}
+                </div>
+
+                <ul class="steps-list">
+                    <li @click="setActive(0)" :class="{ active: activeIndex == 0, done: activeIndex > 0 }" class="steps-item"><span>1</span> Шаг 1</li>
+                    <li @click="setActive(1)" :class="{ active: activeIndex == 1, done: activeIndex > 1 }" class="steps-item "><span>2</span> Шаг 2</li>
+                    <li @click="setActive(2)" :class="{ active: activeIndex == 2, done: activeIndex > 2 }" class="steps-item "><span>3</span> Шаг 3</li>
+                    <li @click="setActive(3)" :class="{ active: activeIndex == 3, done: activeIndex > 3 }" class="steps-item"><span>4</span> Шаг 4</li>
+                    <li @click="setActive(4)" :class="{ active: activeIndex == 4 }" class="steps-item"><span>5</span> Шаг 5</li>
+                </ul>
+                <div v-if="newButton == false">
+                    <button @click="prev" class="btn" :disabled="activeIndex == 0">Назад</button>
+                    <button v-if="activeIndex < 4" @click="next" class="btn primary">Вперед</button>
+                    <button v-else @click="next" class="btn primary">Закончить</button>
+                </div>
+                <div v-if="newButton == true">
+                    <button @click="reset" class="btn">Начать заново</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://unpkg.com/vue@next"></script>
+<script src="vue.js"></script>
+</body>
+</html>
